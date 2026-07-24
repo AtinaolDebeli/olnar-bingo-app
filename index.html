@@ -1,0 +1,1038 @@
+"use
+/*
+=========================================================
+OLNAR BINGO MINI APP
+app.js
+
+This JavaScript file works together with:
+- index.html
+- style.css
+
+All three files must be in the same folder.
+=========================================================
+*/
+
+
+/* =====================================================
+   GLOBAL GAME DATA
+===================================================== */
+
+let currentPage = "homePage";
+
+let walletBalance = 0;
+
+let roomCode = "";
+
+let calledNumbers = [];
+
+let playerCard = [];
+
+let markedNumbers = [];
+
+let gameStarted = false;
+
+
+/* =====================================================
+   PAGE NAVIGATION
+===================================================== */
+
+function showPage(pageId) {
+
+    const pages = document.querySelectorAll(".page");
+
+    pages.forEach(function(page) {
+        page.classList.remove("active");
+    });
+
+    const selectedPage = document.getElementById(pageId);
+
+    if (selectedPage) {
+        selectedPage.classList.add("active");
+        currentPage = pageId;
+    }
+}
+
+
+/* =====================================================
+   SAVE DATA
+===================================================== */
+
+function saveData() {
+
+    const data = {
+        walletBalance: walletBalance,
+        roomCode: roomCode,
+        calledNumbers: calledNumbers,
+        playerCard: playerCard,
+        markedNumbers: markedNumbers,
+        gameStarted: gameStarted
+    };
+
+    localStorage.setItem(
+        "olnarBingoData",
+        JSON.stringify(data)
+    );
+}
+
+
+/* =====================================================
+   LOAD DATA
+===================================================== */
+
+function loadSavedData() {
+
+    const savedData = localStorage.getItem(
+        "olnarBingoData"
+    );
+
+    if (!savedData) {
+        return;
+    }
+
+    try {
+
+        const data = JSON.parse(savedData);
+
+        walletBalance = data.walletBalance || 0;
+
+        roomCode = data.roomCode || "";
+
+        calledNumbers = data.calledNumbers || [];
+
+        playerCard = data.playerCard || [];
+
+        markedNumbers = data.markedNumbers || [];
+
+        gameStarted = data.gameStarted || false;
+
+    } catch (error) {
+
+        console.log(
+            "Could not load saved data."
+        );
+
+    }
+}
+
+
+/* =====================================================
+   UPDATE WALLET
+===================================================== */
+
+function updateWalletDisplay() {
+
+    const walletElement =
+        document.getElementById("walletBalance");
+
+    if (walletElement) {
+
+        walletElement.textContent =
+            walletBalance + " ETB";
+
+    }
+}
+
+
+/* =====================================================
+   CREATE ROOM
+===================================================== */
+
+function createRoom() {
+
+    roomCode =
+        "OLN-" +
+        Math.floor(
+            1000 + Math.random() * 9000
+        );
+
+    gameStarted = false;
+
+    saveData();
+
+    alert(
+        "Your Bingo room has been created.\n\nRoom Code: " +
+        roomCode
+    );
+
+    showPage("gamePage");
+
+    startNewGame();
+}
+
+
+/* =====================================================
+   JOIN ROOM
+===================================================== */
+
+function joinRoom() {
+
+    const input =
+        document.getElementById("roomCode");
+
+    const enteredCode =
+        input.value.trim();
+
+    if (enteredCode === "") {
+
+        alert(
+            "Please enter a Bingo room code."
+        );
+
+        return;
+    }
+
+    roomCode = enteredCode;
+
+    gameStarted = true;
+
+    saveData();
+
+    alert(
+        "You joined room: " +
+        roomCode
+    );
+
+    showPage("gamePage");
+
+    startNewGame();
+}
+
+
+/* =====================================================
+   GENERATE BINGO CARD
+===================================================== */
+
+function generatePlayerCard() {
+
+    playerCard = [];
+
+    const ranges = [
+
+        {
+            min: 1,
+            max: 15
+        },
+
+        {
+            min: 16,
+            max: 30
+        },
+
+        {
+            min: 31,
+            max: 45
+        },
+
+        {
+            min: 46,
+            max: 60
+        },
+
+        {
+            min: 61,
+            max: 75
+        }
+
+    ];
+
+
+    for (
+        let column = 0;
+        column < 5;
+        column++
+    ) {
+
+        const numbers = [];
+
+        while (
+            numbers.length < 5
+        ) {
+
+            const number =
+                Math.floor(
+                    Math.random() *
+                    (
+                        ranges[column].max -
+                        ranges[column].min +
+                        1
+                    )
+                ) +
+                ranges[column].min;
+
+            if (
+                !numbers.includes(number)
+            ) {
+
+                numbers.push(number);
+
+            }
+
+        }
+
+        playerCard.push(numbers);
+
+    }
+
+
+    // FREE SPACE
+    playerCard[2][2] = "FREE";
+
+    markedNumbers = ["FREE"];
+
+    renderPlayerCard();
+
+    saveData();
+}
+
+
+/* =====================================================
+   RENDER PLAYER CARD
+===================================================== */
+
+function renderPlayerCard() {
+
+    const card =
+        document.getElementById(
+            "playerCard"
+        );
+
+    if (!card) {
+        return;
+    }
+
+    card.innerHTML = "";
+
+
+    for (
+        let row = 0;
+        row < 5;
+        row++
+    ) {
+
+        for (
+            let column = 0;
+            column < 5;
+            column++
+        ) {
+
+            const number =
+                playerCard[column][row];
+
+            const cell =
+                document.createElement(
+                    "button"
+                );
+
+            cell.className =
+                "bingo-cell";
+
+            cell.textContent =
+                number;
+
+
+            if (
+                markedNumbers.includes(
+                    number
+                )
+            ) {
+
+                cell.classList.add(
+                    "marked"
+                );
+
+            }
+
+
+            cell.addEventListener(
+                "click",
+                function() {
+
+                    markNumber(
+                        number,
+                        cell
+                    );
+
+                }
+            );
+
+
+            card.appendChild(cell);
+
+        }
+
+    }
+
+}
+
+
+/* =====================================================
+   MARK BINGO NUMBER
+===================================================== */
+
+function markNumber(
+    number,
+    cell
+) {
+
+    if (
+        number === "FREE"
+    ) {
+
+        cell.classList.add(
+            "marked"
+        );
+
+        return;
+    }
+
+
+    if (
+        !calledNumbers.includes(
+            number
+        )
+    ) {
+
+        alert(
+            "This number has not been called yet."
+        );
+
+        return;
+    }
+
+
+    if (
+        markedNumbers.includes(
+            number
+        )
+    ) {
+
+        markedNumbers =
+            markedNumbers.filter(
+                function(item) {
+
+                    return item !== number;
+
+                }
+            );
+
+        cell.classList.remove(
+            "marked"
+        );
+
+    } else {
+
+        markedNumbers.push(
+            number
+        );
+
+        cell.classList.add(
+            "marked"
+        );
+
+    }
+
+
+    saveData();
+
+}
+
+
+/* =====================================================
+   CALL RANDOM NUMBER
+===================================================== */
+
+function callNumber() {
+
+    if (
+        calledNumbers.length >= 75
+    ) {
+
+        alert(
+            "All 75 Bingo numbers have been called."
+        );
+
+        return;
+    }
+
+
+    let number;
+
+
+    do {
+
+        number =
+            Math.floor(
+                Math.random() * 75
+            ) + 1;
+
+    } while (
+        calledNumbers.includes(
+            number
+        )
+    );
+
+
+    calledNumbers.push(
+        number
+    );
+
+
+    const calledNumberElement =
+        document.getElementById(
+            "calledNumber"
+        );
+
+
+    if (
+        calledNumberElement
+    ) {
+
+        calledNumberElement.textContent =
+            number;
+
+    }
+
+
+    renderBingoBoard();
+
+    saveData();
+
+}
+
+
+/* =====================================================
+   RENDER BINGO BOARD
+===================================================== */
+
+function renderBingoBoard() {
+
+    const board =
+        document.getElementById(
+            "bingoBoard"
+        );
+
+    if (!board) {
+        return;
+    }
+
+    board.innerHTML = "";
+
+
+    for (
+        let number = 1;
+        number <= 75;
+        number++
+    ) {
+
+        const cell =
+            document.createElement(
+                "div"
+            );
+
+        cell.className =
+            "board-number";
+
+        cell.textContent =
+            number;
+
+
+        if (
+            calledNumbers.includes(
+                number
+            )
+        ) {
+
+            cell.classList.add(
+                "called"
+            );
+
+        }
+
+
+        board.appendChild(
+            cell
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   CHECK BINGO
+===================================================== */
+
+function checkBingo() {
+
+    if (
+        playerCard.length !== 5
+    ) {
+
+        alert(
+            "Your Bingo card is not ready."
+        );
+
+        return;
+
+    }
+
+
+    // Check rows
+    for (
+        let row = 0;
+        row < 5;
+        row++
+    ) {
+
+        let complete = true;
+
+
+        for (
+            let column = 0;
+            column < 5;
+            column++
+        ) {
+
+            const number =
+                playerCard[column][row];
+
+
+            if (
+                !markedNumbers.includes(
+                    number
+                )
+            ) {
+
+                complete = false;
+
+                break;
+
+            }
+
+        }
+
+
+        if (complete) {
+
+            alert(
+                "🎉 BINGO! You completed a row!"
+            );
+
+            return;
+
+        }
+
+    }
+
+
+    // Check columns
+    for (
+        let column = 0;
+        column < 5;
+        column++
+    ) {
+
+        let complete = true;
+
+
+        for (
+            let row = 0;
+            row < 5;
+            row++
+        ) {
+
+            const number =
+                playerCard[column][row];
+
+
+            if (
+                !markedNumbers.includes(
+                    number
+                )
+            ) {
+
+                complete = false;
+
+                break;
+
+            }
+
+        }
+
+
+        if (complete) {
+
+            alert(
+                "🎉 BINGO! You completed a column!"
+            );
+
+            return;
+
+        }
+
+    }
+
+
+    alert(
+        "Not Bingo yet. Keep playing!"
+    );
+
+}
+
+
+/* =====================================================
+   START NEW GAME
+===================================================== */
+
+function startNewGame() {
+
+    calledNumbers = [];
+
+    markedNumbers = [];
+
+    gameStarted = true;
+
+    generatePlayerCard();
+
+    renderBingoBoard();
+
+    const calledNumberElement =
+        document.getElementById(
+            "calledNumber"
+        );
+
+
+    if (
+        calledNumberElement
+    ) {
+
+        calledNumberElement.textContent =
+            "--";
+
+    }
+
+
+    saveData();
+
+}
+
+
+/* =====================================================
+   COPY REFERRAL LINK
+===================================================== */
+
+function copyReferralLink() {
+
+    const referralLink =
+        window.location.href;
+
+
+    if (
+        navigator.clipboard
+    ) {
+
+        navigator.clipboard.writeText(
+            referralLink
+        )
+        .then(
+            function() {
+
+                alert(
+                    "Referral link copied!"
+                );
+
+            }
+        )
+        .catch(
+            function() {
+
+                alert(
+                    "Could not copy the link."
+                );
+
+            }
+        );
+
+    } else {
+
+        alert(
+            "Copy this link:\n" +
+            referralLink
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   DEPOSIT
+===================================================== */
+
+function depositMoney() {
+
+    const amount =
+        prompt(
+            "Enter deposit amount in ETB:"
+        );
+
+
+    const value =
+        Number(amount);
+
+
+    if (
+        !isNaN(value) &&
+        value > 0
+    ) {
+
+        walletBalance += value;
+
+        updateWalletDisplay();
+
+        saveData();
+
+        alert(
+            "Deposit successful!"
+        );
+
+    } else {
+
+        alert(
+            "Please enter a valid amount."
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   WITHDRAW
+===================================================== */
+
+function withdrawMoney() {
+
+    const amount =
+        prompt(
+            "Enter withdrawal amount in ETB:"
+        );
+
+
+    const value =
+        Number(amount);
+
+
+    if (
+        isNaN(value) ||
+        value <= 0
+    ) {
+
+        alert(
+            "Please enter a valid amount."
+        );
+
+        return;
+
+    }
+
+
+    if (
+        value > walletBalance
+    ) {
+
+        alert(
+            "Insufficient wallet balance."
+        );
+
+        return;
+
+    }
+
+
+    walletBalance -= value;
+
+    updateWalletDisplay();
+
+    saveData();
+
+    alert(
+        "Withdrawal successful!"
+    );
+
+}
+
+
+/* =====================================================
+   EVENT LISTENERS
+===================================================== */
+
+function setupEventListeners() {
+
+    document
+        .getElementById(
+            "homeButton"
+        )
+        .addEventListener(
+            "click",
+            function() {
+
+                showPage(
+                    "homePage"
+                );
+
+            }
+        );
+
+
+    document
+        .getElementById(
+            "createRoomButton"
+        )
+        .addEventListener(
+            "click",
+            createRoom
+        );
+
+
+    document
+        .getElementById(
+            "joinRoomButton"
+        )
+        .addEventListener(
+            "click",
+            function() {
+
+                showPage(
+                    "roomPage"
+                );
+
+            }
+        );
+
+
+    document
+        .getElementById(
+            "enterRoomButton"
+        )
+        .addEventListener(
+            "click",
+            joinRoom
+        );
+
+
+    document
+        .getElementById(
+            "backHomeButton"
+        )
+        .addEventListener(
+            "click",
+            function() {
+
+                showPage(
+                    "homePage"
+                );
+
+            }
+        );
+
+
+    document
+        .getElementById(
+            "referralButton"
+        )
+        .addEventListener(
+            "click",
+            copyReferralLink
+        );
+
+
+    document
+        .getElementById(
+            "callNumberButton"
+        )
+        .addEventListener(
+            "click",
+            callNumber
+        );
+
+
+    document
+        .getElementById(
+            "bingoButton"
+        )
+        .addEventListener(
+            "click",
+            checkBingo
+        );
+
+
+    document
+        .getElementById(
+            "leaveRoomButton"
+        )
+        .addEventListener(
+            "click",
+            function() {
+
+                gameStarted = false;
+
+                saveData();
+
+                showPage(
+                    "homePage"
+                );
+
+            }
+        );
+
+
+    document
+        .getElementById(
+            "depositButton"
+        )
+        .addEventListener(
+            "click",
+            depositMoney
+        );
+
+
+    document
+        .getElementById(
+            "withdrawButton"
+        )
+        .addEventListener(
+            "click",
+            withdrawMoney
+        );
+
+}
+
+
+/* =====================================================
+   INITIALIZE APP
+===================================================== */
+
+function initializeApp() {
+
+    loadSavedData();
+
+    updateWalletDisplay();
+
+    setupEventListeners();
+
+    showPage(
+        "homePage"
+    );
+
+    console.log(
+        "Olnar Bingo Mini App loaded successfully."
+    );
+
+}
+
+
+document.addEventListener(
+    "DOMContentLoaded",
+    initializeApp
+);
