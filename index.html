@@ -7,21 +7,11 @@
 <title>Olnar Bingo</title>
 
 <style>
-
-/* =====================================================
-   RESET
-===================================================== */
-
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
-
-
-/* =====================================================
-   BODY
-===================================================== */
 
 body {
     font-family: Arial, sans-serif;
@@ -30,15 +20,10 @@ body {
     min-height: 100vh;
 }
 
-
-/* =====================================================
-   HEADER
-===================================================== */
-
 header {
     background: #172f43;
     color: white;
-    padding: 25px 20px;
+    padding: 25px 15px;
     text-align: center;
 }
 
@@ -48,26 +33,14 @@ header h1 {
 }
 
 header p {
-    font-size: 17px;
-    opacity: 0.9;
+    font-size: 18px;
 }
 
-
-/* =====================================================
-   MAIN
-===================================================== */
-
 main {
-    width: 100%;
     max-width: 650px;
     margin: auto;
     padding: 20px;
 }
-
-
-/* =====================================================
-   PAGES
-===================================================== */
 
 .page {
     display: none;
@@ -77,38 +50,27 @@ main {
     display: block;
 }
 
-
-/* =====================================================
-   CARDS
-===================================================== */
-
 .card {
     background: white;
-    padding: 20px;
+    padding: 22px;
     margin-bottom: 20px;
-    border-radius: 15px;
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
 }
 
 .card h2,
 .card h3 {
-    margin-bottom: 12px;
+    margin-bottom: 15px;
 }
 
 .card p {
-    margin-bottom: 15px;
-    line-height: 1.5;
+    margin-bottom: 18px;
+    line-height: 1.6;
 }
-
-
-/* =====================================================
-   BUTTONS
-===================================================== */
 
 button {
     font-family: Arial, sans-serif;
     cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
 }
 
 .primary-button,
@@ -128,17 +90,9 @@ button {
     color: white;
 }
 
-.primary-button:active {
-    background: #125ca5;
-}
-
 .secondary-button {
     background: #e7edf3;
     color: #172f43;
-}
-
-.secondary-button:active {
-    background: #d3dce5;
 }
 
 .bingo-button {
@@ -148,39 +102,20 @@ button {
     padding: 18px;
 }
 
-.bingo-button:active {
-    background: #a91f1f;
-}
-
-
-/* =====================================================
-   INPUT
-===================================================== */
-
 input {
     width: 100%;
-    padding: 14px;
+    padding: 15px;
     border: 1px solid #ccd5dd;
     border-radius: 10px;
     font-size: 16px;
     margin-top: 8px;
-    outline: none;
 }
-
-input:focus {
-    border-color: #1976d2;
-}
-
-
-/* =====================================================
-   WALLET
-===================================================== */
 
 .wallet {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px;
+    padding: 16px;
     background: #f2f5f8;
     border-radius: 10px;
     margin-bottom: 10px;
@@ -190,55 +125,35 @@ input:focus {
     color: #1976d2;
 }
 
-
-/* =====================================================
-   GAME HEADER
-===================================================== */
+.room-info {
+    background: #e7f1ff;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    text-align: center;
+}
 
 .game-header {
     text-align: center;
     background: white;
-    padding: 20px;
+    padding: 22px;
     margin-bottom: 20px;
-    border-radius: 15px;
+    border-radius: 16px;
 }
-
-.game-header h2 {
-    margin-bottom: 10px;
-}
-
-.game-header p {
-    margin-bottom: 5px;
-}
-
-
-/* =====================================================
-   CALLED NUMBER
-===================================================== */
 
 #calledNumber {
     display: inline-flex;
     justify-content: center;
     align-items: center;
-
     width: 70px;
     height: 70px;
-
-    margin: 10px;
-
+    margin: 12px;
     border-radius: 50%;
-
     background: #172f43;
     color: white;
-
-    font-size: 26px;
+    font-size: 28px;
     font-weight: bold;
 }
-
-
-/* =====================================================
-   BINGO BOARD
-===================================================== */
 
 .bingo-board {
     display: grid;
@@ -250,12 +165,9 @@ input:focus {
     display: flex;
     justify-content: center;
     align-items: center;
-
     min-height: 45px;
-
     background: #edf1f5;
     border-radius: 7px;
-
     font-weight: bold;
 }
 
@@ -264,34 +176,15 @@ input:focus {
     color: white;
 }
 
-
-/* =====================================================
-   BINGO CARD HEADER
-===================================================== */
-
 .bingo-card-header {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-
     gap: 5px;
-
     margin-bottom: 5px;
-
     text-align: center;
-
     font-weight: bold;
-
     color: #1976d2;
 }
-
-.bingo-card-header span {
-    padding: 8px;
-}
-
-
-/* =====================================================
-   PLAYER CARD
-===================================================== */
 
 .player-card {
     display: grid;
@@ -301,57 +194,29 @@ input:focus {
 
 .bingo-cell {
     aspect-ratio: 1 / 1;
-
     border: 1px solid #ccd5dd;
     border-radius: 8px;
-
     background: white;
-
-    font-size: 16px;
+    font-size: 15px;
     font-weight: bold;
-
-    color: #172f43;
 }
 
 .bingo-cell.marked {
     background: #1976d2;
     color: white;
-    border-color: #1976d2;
 }
 
-
-/* =====================================================
-   ROOM CODE
-===================================================== */
-
-.room-code-display {
-    background: #f2f5f8;
-    padding: 15px;
-    border-radius: 10px;
+.status {
     text-align: center;
+    font-weight: bold;
     margin-top: 15px;
 }
 
-.room-code-display strong {
-    color: #1976d2;
-    font-size: 22px;
-}
-
-
-/* =====================================================
-   FOOTER
-===================================================== */
-
 footer {
     text-align: center;
-    padding: 20px;
+    padding: 25px;
     color: #6b7280;
 }
-
-
-/* =====================================================
-   MOBILE
-===================================================== */
 
 @media (max-width: 400px) {
 
@@ -371,44 +236,20 @@ footer {
         min-height: 36px;
         font-size: 12px;
     }
-
-    header h1 {
-        font-size: 26px;
-    }
-
 }
-
 </style>
 </head>
 
-
 <body>
 
-
-<!-- =====================================================
-     HEADER
-===================================================== -->
-
 <header>
-
     <h1>🎱 Olnar Bingo</h1>
-
     <p>Play Bingo with friends</p>
-
 </header>
-
-
-<!-- =====================================================
-     MAIN
-===================================================== -->
 
 <main>
 
-
-<!-- =====================================================
-     HOME PAGE
-===================================================== -->
-
+<!-- HOME PAGE -->
 <section id="homePage" class="page active">
 
     <div class="card">
@@ -419,20 +260,17 @@ footer {
             Create a Bingo room or join an existing room.
         </p>
 
-
         <button
             id="createRoomButton"
             class="primary-button">
             Create Bingo Room
         </button>
 
-
         <button
             id="joinRoomButton"
             class="secondary-button">
             Join Bingo Room
         </button>
-
 
         <button
             id="referralButton"
@@ -443,29 +281,23 @@ footer {
     </div>
 
 
-    <!-- WALLET -->
-
     <div class="card">
 
         <h2>Wallet</h2>
 
         <div class="wallet">
-
             <span>Balance</span>
 
             <strong id="walletBalance">
                 0 ETB
             </strong>
-
         </div>
-
 
         <button
             id="depositButton"
             class="primary-button">
             Deposit
         </button>
-
 
         <button
             id="withdrawButton"
@@ -478,11 +310,7 @@ footer {
 </section>
 
 
-
-<!-- =====================================================
-     ROOM PAGE
-===================================================== -->
-
+<!-- JOIN ROOM PAGE -->
 <section id="roomPage" class="page">
 
     <div class="card">
@@ -490,24 +318,19 @@ footer {
         <h2>Join Bingo Room</h2>
 
         <p>
-            Enter the room code given to you.
+            Enter the room code shared by your friend.
         </p>
 
-
         <input
-            id="roomCode"
+            id="roomCodeInput"
             type="text"
-            placeholder="Enter room code"
-            autocomplete="off"
-        >
-
+            placeholder="Example: OLN-1234">
 
         <button
             id="enterRoomButton"
             class="primary-button">
             Enter Room
         </button>
-
 
         <button
             id="backHomeButton"
@@ -520,40 +343,24 @@ footer {
 </section>
 
 
-
-<!-- =====================================================
-     GAME PAGE
-===================================================== -->
-
+<!-- GAME PAGE -->
 <section id="gamePage" class="page">
-
-
-    <!-- GAME HEADER -->
 
     <div class="game-header">
 
         <h2>Live Bingo</h2>
 
-        <p>Room Code:</p>
-
-        <div class="room-code-display">
-
-            <strong id="displayRoomCode">
-                ----
-            </strong>
-
+        <div
+            id="roomInfo"
+            class="room-info">
+            Room: Not connected
         </div>
 
-
-        <p style="margin-top: 15px;">
-            Called Number:
-        </p>
-
+        <p>Called Number:</p>
 
         <strong id="calledNumber">
             --
         </strong>
-
 
         <button
             id="callNumberButton"
@@ -564,16 +371,9 @@ footer {
     </div>
 
 
-
-    <!-- BINGO BOARD -->
-
     <div class="card">
 
         <h3>Live Bingo Board</h3>
-
-        <p>
-            Blue numbers have already been called.
-        </p>
 
         <div
             id="bingoBoard"
@@ -583,30 +383,22 @@ footer {
     </div>
 
 
-
-    <!-- PLAYER CARD -->
-
     <div class="card">
 
         <h3>Your Bingo Card</h3>
 
-
         <div class="bingo-card-header">
-
             <span>B</span>
             <span>I</span>
             <span>N</span>
             <span>G</span>
             <span>O</span>
-
         </div>
-
 
         <div
             id="playerCard"
             class="player-card">
         </div>
-
 
         <button
             id="bingoButton"
@@ -614,10 +406,13 @@ footer {
             BINGO!
         </button>
 
+        <p
+            id="gameStatus"
+            class="status">
+        </p>
+
     </div>
 
-
-    <!-- LEAVE ROOM -->
 
     <button
         id="leaveRoomButton"
@@ -627,36 +422,19 @@ footer {
 
 </section>
 
-
 </main>
 
 
-<!-- =====================================================
-     FOOTER
-===================================================== -->
-
 <footer>
-
-    <p>
-        © 2026 Olnar Bingo
-    </p>
-
+    <p>© 2026 Olnar Bingo</p>
 </footer>
 
-
-
-<!-- =====================================================
-     JAVASCRIPT
-     EVERYTHING IS INSIDE THIS FILE
-===================================================== -->
 
 <script>
 
 /* =====================================================
    GLOBAL GAME DATA
 ===================================================== */
-
-let currentPage = "homePage";
 
 let walletBalance = 0;
 
@@ -686,16 +464,12 @@ function showPage(pageId) {
 
     });
 
-
     const selectedPage =
         document.getElementById(pageId);
-
 
     if (selectedPage) {
 
         selectedPage.classList.add("active");
-
-        currentPage = pageId;
 
     }
 
@@ -710,27 +484,29 @@ function saveData() {
 
     const data = {
 
-        walletBalance: walletBalance,
+        walletBalance:
+            walletBalance,
 
-        roomCode: roomCode,
+        roomCode:
+            roomCode,
 
-        calledNumbers: calledNumbers,
+        calledNumbers:
+            calledNumbers,
 
-        playerCard: playerCard,
+        playerCard:
+            playerCard,
 
-        markedNumbers: markedNumbers,
+        markedNumbers:
+            markedNumbers,
 
-        gameStarted: gameStarted
+        gameStarted:
+            gameStarted
 
     };
 
-
     localStorage.setItem(
-
         "olnarBingoData",
-
         JSON.stringify(data)
-
     );
 
 }
@@ -740,14 +516,12 @@ function saveData() {
    LOAD DATA
 ===================================================== */
 
-function loadSavedData() {
+function loadData() {
 
     const savedData =
-
         localStorage.getItem(
             "olnarBingoData"
         );
-
 
     if (!savedData) {
 
@@ -755,48 +529,39 @@ function loadSavedData() {
 
     }
 
-
     try {
 
         const data =
             JSON.parse(savedData);
 
-
         walletBalance =
             data.walletBalance || 0;
 
-
         roomCode =
             data.roomCode || "";
-
 
         calledNumbers =
             Array.isArray(data.calledNumbers)
                 ? data.calledNumbers
                 : [];
 
-
         playerCard =
             Array.isArray(data.playerCard)
                 ? data.playerCard
                 : [];
-
 
         markedNumbers =
             Array.isArray(data.markedNumbers)
                 ? data.markedNumbers
                 : [];
 
-
         gameStarted =
             data.gameStarted || false;
-
 
     } catch (error) {
 
         console.log(
-            "Could not load saved data.",
-            error
+            "Could not load saved data."
         );
 
     }
@@ -810,15 +575,14 @@ function loadSavedData() {
 
 function updateWalletDisplay() {
 
-    const walletElement =
+    const wallet =
         document.getElementById(
             "walletBalance"
         );
 
+    if (wallet) {
 
-    if (walletElement) {
-
-        walletElement.textContent =
+        wallet.textContent =
             walletBalance + " ETB";
 
     }
@@ -839,24 +603,20 @@ function createRoom() {
             Math.random() * 9000
         );
 
-
     gameStarted = true;
 
+    startNewGame();
+
+    updateRoomDisplay();
 
     saveData();
 
-
     alert(
-        "Your Bingo room has been created.\n\n" +
-        "Room Code: " +
+        "Bingo room created!\n\nRoom Code: " +
         roomCode
     );
 
-
     showPage("gamePage");
-
-
-    startNewGame();
 
 }
 
@@ -869,91 +629,84 @@ function joinRoom() {
 
     const input =
         document.getElementById(
-            "roomCode"
+            "roomCodeInput"
         );
-
-
-    if (!input) {
-
-        return;
-
-    }
-
 
     const enteredCode =
-        input.value.trim();
+        input.value.trim().toUpperCase();
 
-
-    if (enteredCode === "") {
+    if (!enteredCode) {
 
         alert(
-            "Please enter a Bingo room code."
+            "Please enter a room code."
         );
 
         return;
 
     }
-
 
     roomCode =
         enteredCode;
 
-
     gameStarted = true;
 
+    startNewGame();
+
+    updateRoomDisplay();
 
     saveData();
 
-
     alert(
-        "You joined room: " +
+        "You joined room:\n" +
         roomCode
     );
 
-
     showPage("gamePage");
-
-
-    startNewGame();
 
 }
 
 
 /* =====================================================
-   GENERATE BINGO CARD
+   UPDATE ROOM DISPLAY
+===================================================== */
+
+function updateRoomDisplay() {
+
+    const roomInfo =
+        document.getElementById(
+            "roomInfo"
+        );
+
+    if (roomInfo) {
+
+        roomInfo.textContent =
+            "Room: " +
+            (roomCode || "Not connected");
+
+    }
+
+}
+
+
+/* =====================================================
+   GENERATE PLAYER CARD
 ===================================================== */
 
 function generatePlayerCard() {
 
     playerCard = [];
 
-
     const ranges = [
 
-        {
-            min: 1,
-            max: 15
-        },
+        [1, 15],
 
-        {
-            min: 16,
-            max: 30
-        },
+        [16, 30],
 
-        {
-            min: 31,
-            max: 45
-        },
+        [31, 45],
 
-        {
-            min: 46,
-            max: 60
-        },
+        [46, 60],
 
-        {
-            min: 61,
-            max: 75
-        }
+        [61, 75]
 
     ];
 
@@ -966,25 +719,20 @@ function generatePlayerCard() {
 
         const numbers = [];
 
-
         while (
             numbers.length < 5
         ) {
-
-            const range =
-                ranges[column];
-
 
             const number =
                 Math.floor(
                     Math.random() *
                     (
-                        range.max -
-                        range.min +
+                        ranges[column][1] -
+                        ranges[column][0] +
                         1
                     )
                 ) +
-                range.min;
+                ranges[column][0];
 
 
             if (
@@ -997,26 +745,15 @@ function generatePlayerCard() {
 
         }
 
-
         playerCard.push(numbers);
 
     }
 
 
     // FREE SPACE
+    playerCard[2][2] = "FREE";
 
-    playerCard[2][2] =
-        "FREE";
-
-
-    markedNumbers =
-        ["FREE"];
-
-
-    renderPlayerCard();
-
-
-    saveData();
+    markedNumbers = ["FREE"];
 
 }
 
@@ -1032,13 +769,11 @@ function renderPlayerCard() {
             "playerCard"
         );
 
-
     if (!card) {
 
         return;
 
     }
-
 
     card.innerHTML = "";
 
@@ -1065,10 +800,6 @@ function renderPlayerCard() {
                 );
 
 
-            cell.type =
-                "button";
-
-
             cell.className =
                 "bingo-cell";
 
@@ -1091,9 +822,7 @@ function renderPlayerCard() {
 
 
             cell.addEventListener(
-
                 "click",
-
                 function() {
 
                     markNumber(
@@ -1102,11 +831,12 @@ function renderPlayerCard() {
                     );
 
                 }
-
             );
 
 
-            card.appendChild(cell);
+            card.appendChild(
+                cell
+            );
 
         }
 
@@ -1116,7 +846,7 @@ function renderPlayerCard() {
 
 
 /* =====================================================
-   MARK BINGO NUMBER
+   MARK NUMBER
 ===================================================== */
 
 function markNumber(
@@ -1160,15 +890,12 @@ function markNumber(
 
         markedNumbers =
             markedNumbers.filter(
-
                 function(item) {
 
                     return item !== number;
 
                 }
-
             );
-
 
         cell.classList.remove(
             "marked"
@@ -1179,7 +906,6 @@ function markNumber(
         markedNumbers.push(
             number
         );
-
 
         cell.classList.add(
             "marked"
@@ -1194,7 +920,7 @@ function markNumber(
 
 
 /* =====================================================
-   CALL RANDOM NUMBER
+   CALL NUMBER
 ===================================================== */
 
 function callNumber() {
@@ -1223,11 +949,9 @@ function callNumber() {
             ) + 1;
 
     } while (
-
         calledNumbers.includes(
             number
         )
-
     );
 
 
@@ -1236,15 +960,15 @@ function callNumber() {
     );
 
 
-    const calledNumberElement =
+    const calledNumber =
         document.getElementById(
             "calledNumber"
         );
 
 
-    if (calledNumberElement) {
+    if (calledNumber) {
 
-        calledNumberElement.textContent =
+        calledNumber.textContent =
             number;
 
     }
@@ -1252,9 +976,7 @@ function callNumber() {
 
     renderBingoBoard();
 
-
     renderPlayerCard();
-
 
     saveData();
 
@@ -1272,13 +994,11 @@ function renderBingoBoard() {
             "bingoBoard"
         );
 
-
     if (!board) {
 
         return;
 
     }
-
 
     board.innerHTML = "";
 
@@ -1316,4 +1036,490 @@ function renderBingoBoard() {
         }
 
 
-    
+        board.appendChild(
+            cell
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   CHECK BINGO
+===================================================== */
+
+function checkBingo() {
+
+    if (
+        playerCard.length !== 5
+    ) {
+
+        alert(
+            "Your Bingo card is not ready."
+        );
+
+        return;
+
+    }
+
+
+    // ROWS
+
+    for (
+        let row = 0;
+        row < 5;
+        row++
+    ) {
+
+        let complete = true;
+
+
+        for (
+            let column = 0;
+            column < 5;
+            column++
+        ) {
+
+            const number =
+                playerCard[column][row];
+
+
+            if (
+                !markedNumbers.includes(
+                    number
+                )
+            ) {
+
+                complete = false;
+
+                break;
+
+            }
+
+        }
+
+
+        if (complete) {
+
+            alert(
+                "🎉 BINGO!\nYou completed a row!"
+            );
+
+            return;
+
+        }
+
+    }
+
+
+    // COLUMNS
+
+    for (
+        let column = 0;
+        column < 5;
+        column++
+    ) {
+
+        let complete = true;
+
+
+        for (
+            let row = 0;
+            row < 5;
+            row++
+        ) {
+
+            const number =
+                playerCard[column][row];
+
+
+            if (
+                !markedNumbers.includes(
+                    number
+                )
+            ) {
+
+                complete = false;
+
+                break;
+
+            }
+
+        }
+
+
+        if (complete) {
+
+            alert(
+                "🎉 BINGO!\nYou completed a column!"
+            );
+
+            return;
+
+        }
+
+    }
+
+
+    alert(
+        "Not Bingo yet. Keep playing!"
+    );
+
+}
+
+
+/* =====================================================
+   START NEW GAME
+===================================================== */
+
+function startNewGame() {
+
+    calledNumbers = [];
+
+    markedNumbers = [];
+
+    gameStarted = true;
+
+    generatePlayerCard();
+
+    renderPlayerCard();
+
+    renderBingoBoard();
+
+
+    const calledNumber =
+        document.getElementById(
+            "calledNumber"
+        );
+
+
+    if (calledNumber) {
+
+        calledNumber.textContent =
+            "--";
+
+    }
+
+
+    saveData();
+
+}
+
+
+/* =====================================================
+   COPY REFERRAL LINK
+===================================================== */
+
+function copyReferralLink() {
+
+    const link =
+        window.location.href;
+
+
+    if (
+        navigator.clipboard &&
+        window.isSecureContext
+    ) {
+
+        navigator.clipboard
+            .writeText(link)
+            .then(function() {
+
+                alert(
+                    "Referral link copied!"
+                );
+
+            })
+            .catch(function() {
+
+                alert(
+                    "Could not copy the link."
+                );
+
+            });
+
+    } else {
+
+        alert(
+            "Copy this link:\n" +
+            link
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   DEPOSIT
+===================================================== */
+
+function depositMoney() {
+
+    const amount =
+        prompt(
+            "Enter deposit amount in ETB:"
+        );
+
+
+    const value =
+        Number(amount);
+
+
+    if (
+        !isNaN(value) &&
+        value > 0
+    ) {
+
+        walletBalance += value;
+
+        updateWalletDisplay();
+
+        saveData();
+
+        alert(
+            "Deposit successful!"
+        );
+
+    } else {
+
+        alert(
+            "Please enter a valid amount."
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   WITHDRAW
+===================================================== */
+
+function withdrawMoney() {
+
+    const amount =
+        prompt(
+            "Enter withdrawal amount in ETB:"
+        );
+
+
+    const value =
+        Number(amount);
+
+
+    if (
+        isNaN(value) ||
+        value <= 0
+    ) {
+
+        alert(
+            "Please enter a valid amount."
+        );
+
+        return;
+
+    }
+
+
+    if (
+        value > walletBalance
+    ) {
+
+        alert(
+            "Insufficient wallet balance."
+        );
+
+        return;
+
+    }
+
+
+    walletBalance -= value;
+
+    updateWalletDisplay();
+
+    saveData();
+
+    alert(
+        "Withdrawal successful!"
+    );
+
+}
+
+
+/* =====================================================
+   EVENT LISTENERS
+===================================================== */
+
+function setupEventListeners() {
+
+    document
+        .getElementById(
+            "createRoomButton"
+        )
+        .addEventListener(
+            "click",
+            createRoom
+        );
+
+
+    document
+        .getElementById(
+            "joinRoomButton"
+        )
+        .addEventListener(
+            "click",
+            function() {
+
+                showPage(
+                    "roomPage"
+                );
+
+            }
+        );
+
+
+    document
+        .getElementById(
+            "enterRoomButton"
+        )
+        .addEventListener(
+            "click",
+            joinRoom
+        );
+
+
+    document
+        .getElementById(
+            "backHomeButton"
+        )
+        .addEventListener(
+            "click",
+            function() {
+
+                showPage(
+                    "homePage"
+                );
+
+            }
+        );
+
+
+    document
+        .getElementById(
+            "referralButton"
+        )
+        .addEventListener(
+            "click",
+            copyReferralLink
+        );
+
+
+    document
+        .getElementById(
+            "callNumberButton"
+        )
+        .addEventListener(
+            "click",
+            callNumber
+        );
+
+
+    document
+        .getElementById(
+            "bingoButton"
+        )
+        .addEventListener(
+            "click",
+            checkBingo
+        );
+
+
+    document
+        .getElementById(
+            "leaveRoomButton"
+        )
+        .addEventListener(
+            "click",
+            function() {
+
+                gameStarted = false;
+
+                saveData();
+
+                showPage(
+                    "homePage"
+                );
+
+            }
+        );
+
+
+    document
+        .getElementById(
+            "depositButton"
+        )
+        .addEventListener(
+            "click",
+            depositMoney
+        );
+
+
+    document
+        .getElementById(
+            "withdrawButton"
+        )
+        .addEventListener(
+            "click",
+            withdrawMoney
+        );
+
+}
+
+
+/* =====================================================
+   INITIALIZE APP
+===================================================== */
+
+function initializeApp() {
+
+    loadData();
+
+    updateWalletDisplay();
+
+    updateRoomDisplay();
+
+    setupEventListeners();
+
+    renderBingoBoard();
+
+    if (
+        playerCard.length === 5
+    ) {
+
+        renderPlayerCard();
+
+    }
+
+    showPage(
+        "homePage"
+    );
+
+    console.log(
+        "Olnar Bingo loaded successfully."
+    );
+
+}
+
+
+document.addEventListener(
+    "DOMContentLoaded",
+    initializeApp
+);
+
+</script>
+
+</body>
+</html>
