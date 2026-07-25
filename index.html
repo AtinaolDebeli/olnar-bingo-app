@@ -1352,140 +1352,147 @@ function withdrawMoney() {
 /* =====================================================
    EVENT LISTENERS
 ===================================================== */
-
+    
 function setupEventListeners() {
 
-    document
-        .getElementById(
-            "createRoomButton"
-        )
-        .addEventListener(
+    const createRoomButton =
+        document.getElementById("createRoomButton");
+
+    if (createRoomButton) {
+        createRoomButton.addEventListener(
             "click",
             createRoom
         );
+    }
 
 
-    document
-        .getElementById(
-            "joinRoomButton"
-        )
-        .addEventListener(
+    const joinRoomButton =
+        document.getElementById("joinRoomButton");
+
+    if (joinRoomButton) {
+        joinRoomButton.addEventListener(
             "click",
             function() {
-
-                showPage(
-                    "roomPage"
-                );
-
+                showPage("roomPage");
             }
         );
+    }
 
 
-    document
-        .getElementById(
-            "enterRoomButton"
-        )
-        .addEventListener(
+    const enterRoomButton =
+        document.getElementById("enterRoomButton");
+
+    if (enterRoomButton) {
+        enterRoomButton.addEventListener(
             "click",
             joinRoom
         );
+    }
 
 
-    document
-        .getElementById(
-            "backHomeButton"
-        )
-        .addEventListener(
+    const backHomeButton =
+        document.getElementById("backHomeButton");
+
+    if (backHomeButton) {
+        backHomeButton.addEventListener(
             "click",
             function() {
-
-                showPage(
-                    "homePage"
-                );
-
+                showPage("homePage");
             }
         );
+    }
 
 
-    document
-        .getElementById(
-            "referralButton"
-        )
-        .addEventListener(
+    const homeButton =
+        document.getElementById("homeButton");
+
+    if (homeButton) {
+        homeButton.addEventListener(
+            "click",
+            function() {
+                showPage("homePage");
+            }
+        );
+    }
+
+
+    const referralButton =
+        document.getElementById("referralButton");
+
+    if (referralButton) {
+        referralButton.addEventListener(
             "click",
             copyReferralLink
         );
+    }
 
 
-    document
-        .getElementById(
-            "callNumberButton"
-        )
-        .addEventListener(
+    const callNumberButton =
+        document.getElementById("callNumberButton");
+
+    if (callNumberButton) {
+        callNumberButton.addEventListener(
             "click",
             callNumber
         );
+    }
 
 
-    document
-        .getElementById(
-            "bingoButton"
-        )
-        .addEventListener(
+    const bingoButton =
+        document.getElementById("bingoButton");
+
+    if (bingoButton) {
+        bingoButton.addEventListener(
             "click",
             checkBingo
         );
+    }
 
 
-    document
-        .getElementById(
-            "leaveRoomButton"
-        )
-        .addEventListener(
+    const leaveRoomButton =
+        document.getElementById("leaveRoomButton");
+
+    if (leaveRoomButton) {
+        leaveRoomButton.addEventListener(
             "click",
             function() {
-
                 gameStarted = false;
-
                 saveData();
-
-                showPage(
-                    "homePage"
-                );
-
+                showPage("homePage");
             }
         );
+    }
 
 
-    document
-        .getElementById(
-            "depositButton"
-        )
-        .addEventListener(
+    const depositButton =
+        document.getElementById("depositButton");
+
+    if (depositButton) {
+        depositButton.addEventListener(
             "click",
             depositMoney
         );
+    }
 
 
-    document
-        .getElementById(
-            "withdrawButton"
-        )
-        .addEventListener(
+    const withdrawButton =
+        document.getElementById("withdrawButton");
+
+    if (withdrawButton) {
+        withdrawButton.addEventListener(
             "click",
             withdrawMoney
         );
+    }
 
 }
-
-
 /* =====================================================
    INITIALIZE APP
 ===================================================== */
 
 function initializeApp() {
 
-    loadData();
+    loadSavedData();
 
     updateWalletDisplay();
 
@@ -1495,31 +1502,14 @@ function initializeApp() {
 
     renderBingoBoard();
 
-    if (
-        playerCard.length === 5
-    ) {
-
+    if (playerCard.length === 5) {
         renderPlayerCard();
-
     }
 
-    showPage(
-        "homePage"
-    );
+    showPage("homePage");
 
     console.log(
         "Olnar Bingo loaded successfully."
     );
 
 }
-
-
-document.addEventListener(
-    "DOMContentLoaded",
-    initializeApp
-);
-
-</script>
-
-</body>
-</html>
